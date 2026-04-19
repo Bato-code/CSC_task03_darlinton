@@ -37,23 +37,41 @@ html, body, [class*="css"] {
 
 /* Main content card */
 .main > .block-container {
-    background: rgba(255, 255, 255, 0.75) !important;
+    background: rgba(255, 255, 255, 0.92) !important;
     backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
     border-radius: 20px !important;
-    border: 1px solid rgba(255, 255, 255, 0.6) !important;
-    box-shadow: 0 8px 40px rgba(2, 119, 189, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 8px 40px rgba(2, 119, 189, 0.18) !important;
     padding: 2rem 2.5rem !important;
     margin-top: 1.5rem !important;
     margin-bottom: 1.5rem !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
 }
 
-/* Labels */
-.stTextArea label, .stRadio label, p, .stMarkdown p {
+/* ── Global text visibility ── */
+/* Force dark navy on all text so it's readable on every background */
+p, span, div, li {
+    color: #01579b;
+}
+label,
+.stTextArea label,
+.stRadio label,
+.stMarkdown p,
+.stMarkdown span,
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] span,
+[data-testid="stWidgetLabel"] p,
+.stRadio > div > label > div > p,
+.stRadio [role="radiogroup"] label p {
     color: #01579b !important;
     font-weight: 500 !important;
 }
+/* Alert text stays dark */
+.stAlert p { color: #1a1a2e !important; }
 
+/* ── Header ── */
 .main-header {
     text-align: center;
     padding: 2rem 0 1.2rem;
@@ -65,6 +83,7 @@ html, body, [class*="css"] {
     color: #01579b;
     margin-bottom: 0.3rem;
     text-shadow: 0 2px 8px rgba(1, 87, 155, 0.15);
+    line-height: 1.2;
 }
 .main-header p {
     color: #0277bd;
@@ -84,24 +103,29 @@ html, body, [class*="css"] {
     text-transform: uppercase;
 }
 
-/* Textarea */
+/* ── Textarea ── */
 .stTextArea textarea {
     font-family: 'JetBrains Mono', monospace !important;
     font-size: 0.88rem !important;
     border-radius: 12px !important;
     border: 1.5px solid rgba(2, 119, 189, 0.3) !important;
     padding: 14px !important;
-    background: rgba(255, 255, 255, 0.85) !important;
+    background: rgba(255, 255, 255, 0.98) !important;
     color: #01579b !important;
     transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 .stTextArea textarea:focus {
     border-color: #0288d1 !important;
     box-shadow: 0 0 0 3px rgba(2, 136, 209, 0.2) !important;
     background: #fff !important;
 }
+.stTextArea textarea::placeholder {
+    color: #90caf9 !important;
+}
 
-/* Button */
+/* ── Button ── */
 .stButton > button {
     width: 100%;
     background: linear-gradient(135deg, #0288d1, #01579b) !important;
@@ -125,14 +149,14 @@ html, body, [class*="css"] {
     transform: translateY(0px);
 }
 
-/* Divider */
+/* ── Divider ── */
 hr {
     border-color: rgba(2, 119, 189, 0.2) !important;
 }
 
-/* Result cards */
+/* ── Result cards ── */
 .result-spam {
-    background: rgba(255, 241, 242, 0.9);
+    background: rgba(255, 235, 235, 0.98);
     border: 1.5px solid #fca5a5;
     border-left: 5px solid #ef4444;
     border-radius: 12px;
@@ -141,7 +165,7 @@ hr {
     backdrop-filter: blur(8px);
 }
 .result-ham {
-    background: rgba(240, 253, 244, 0.9);
+    background: rgba(235, 253, 240, 0.98);
     border: 1.5px solid #86efac;
     border-left: 5px solid #22c55e;
     border-radius: 12px;
@@ -153,11 +177,13 @@ hr {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.4rem;
+    color: #1a1a2e !important;
 }
 .result-sub {
     font-size: 0.9rem;
-    color: #0277bd;
+    color: #0277bd !important;
     margin-bottom: 1rem;
+    font-weight: 600;
 }
 .confidence-bar-wrap {
     background: rgba(2, 119, 189, 0.15);
@@ -180,10 +206,11 @@ hr {
 }
 .conf-label {
     font-size: 0.82rem;
-    color: #0277bd;
+    color: #01579b !important;
+    font-weight: 600;
 }
 
-/* Examples */
+/* ── Example chips ── */
 .example-chip {
     display: inline-block;
     background: rgba(2, 119, 189, 0.1);
@@ -196,9 +223,9 @@ hr {
     color: #01579b;
     transition: background 0.15s;
 }
-.example-chip:hover {background: rgba(2, 119, 189, 0.2);}
+.example-chip:hover { background: rgba(2, 119, 189, 0.2); }
 
-/* Concept pills */
+/* ── Concept pills ── */
 .concept-row {
     display: flex;
     flex-wrap: wrap;
@@ -214,7 +241,7 @@ hr {
     padding: 5px 12px;
 }
 
-/* Sidebar */
+/* ── Sidebar ── */
 .sidebar-section {
     background: rgba(255, 255, 255, 0.6);
     border-radius: 10px;
@@ -229,6 +256,48 @@ hr {
     letter-spacing: 0.08em;
     color: #0288d1;
     margin-bottom: 0.6rem;
+}
+
+/* ════════════════════════════════════════
+   MOBILE RESPONSIVENESS
+   ════════════════════════════════════════ */
+
+/* Tablet (≤768px) */
+@media (max-width: 768px) {
+    .main > .block-container {
+        padding: 1.2rem 1rem !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+        border-radius: 14px !important;
+    }
+    .main-header h1  { font-size: 1.7rem; }
+    .main-header p   { font-size: 0.85rem; }
+    .result-label    { font-size: 1.2rem; }
+    .result-spam,
+    .result-ham      { padding: 1.1rem; }
+    .stButton > button {
+        font-size: 0.95rem !important;
+        padding: 0.65rem !important;
+    }
+    .stTextArea textarea { font-size: 0.82rem !important; }
+}
+
+/* Mobile (≤480px) */
+@media (max-width: 480px) {
+    .main > .block-container {
+        padding: 0.9rem 0.7rem !important;
+        margin-top: 0.25rem !important;
+        border-radius: 10px !important;
+    }
+    .main-header          { padding: 1rem 0 0.8rem; }
+    .main-header h1       { font-size: 1.25rem; letter-spacing: -0.01em; }
+    .main-header p        { font-size: 0.78rem; }
+    .result-label         { font-size: 1rem; }
+    .result-spam,
+    .result-ham           { padding: 0.9rem; }
+    .stTextArea textarea  { font-size: 0.78rem !important; }
+    .stButton > button    { font-size: 0.88rem !important; }
+    .conf-label           { font-size: 0.75rem; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -366,28 +435,19 @@ st.divider()
 st.markdown("""
 <div style="
     text-align: center;
-    background: rgba(1, 87, 155, 0.08);
-    border: 1px solid rgba(2, 119, 189, 0.25);
-    border-radius: 14px;
-    padding: 1.2rem 2rem;
-    margin-top: 0.5rem;
+    background: rgba(1, 87, 155, 0.07);
+    border: 1px solid rgba(2, 119, 189, 0.2);
+    border-radius: 10px;
+    padding: 0.55rem 1.2rem;
+    margin-top: 0.4rem;
 ">
-    <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#0288d1; margin-bottom:0.6rem;">
-        🎓 Project Owner
-    </div>
-    <div style="display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap;">
-        <div>
-            <span style="font-size:0.75rem; color:#0277bd; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Name</span><br>
-            <span style="font-size:0.95rem; font-weight:700; color:#01579b;">Chukwudi Darlington</span>
-        </div>
-        <div>
-            <span style="font-size:0.75rem; color:#0277bd; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Matric No.</span><br>
-            <span style="font-size:0.95rem; font-weight:700; color:#01579b;">20231411152</span>
-        </div>
-        <div>
-            <span style="font-size:0.75rem; color:#0277bd; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;">Department</span><br>
-            <span style="font-size:0.95rem; font-weight:700; color:#01579b;">CYB</span>
-        </div>
-    </div>
+    <span style="font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.09em; color:#0288d1;">🎓 Owner &nbsp;|&nbsp;</span>
+    <span style="font-size:0.72rem; color:#0277bd; font-weight:600;">Chukwudi Darlington</span>
+    <span style="font-size:0.65rem; color:#90caf9;"> &nbsp;·&nbsp; </span>
+    <span style="font-size:0.65rem; color:#0277bd; font-weight:600;">Matric:</span>
+    <span style="font-size:0.72rem; color:#01579b; font-weight:700;"> 20231411152</span>
+    <span style="font-size:0.65rem; color:#90caf9;"> &nbsp;·&nbsp; </span>
+    <span style="font-size:0.65rem; color:#0277bd; font-weight:600;">Dept:</span>
+    <span style="font-size:0.72rem; color:#01579b; font-weight:700;"> CYB</span>
 </div>
 """, unsafe_allow_html=True)
